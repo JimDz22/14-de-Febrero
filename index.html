@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>14 de Febrero 💓</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #ff4b7d;
+            --accent: #00d4ff;
+            --bg: #000814;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            overflow-x: hidden;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            text-align: center;
+            min-height: 100-vh;
+        }
+
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: radial-gradient(circle at center, #001d3d 0%, #000814 100%);
+        }
+
+        .stars {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: transparent url("https://www.transparenttextures.com/patterns/stardust.png") repeat;
+            animation: moveStars 120s linear infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes moveStars {
+            from { transform: translate(0,0); }
+            to { transform: translate(-50%, -50%); }
+        }
+
+        .container {
+            display: block;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1.2s ease, transform 1.2s ease;
+            position: relative;
+            z-index: 2;
+            padding: 40px 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-shadow: 0 0 15px rgba(255, 75, 125, 0.5);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+            gap: 15px;
+            justify-items: center;
+            margin-bottom: 120px;
+        }
+
+        .numero {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.3);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-size: 1.2rem;
+            user-select: none;
+        }
+
+        .numero:hover {
+            transform: scale(1.15);
+            border-color: var(--accent);
+            box-shadow: 0 0 15px var(--accent);
+        }
+
+        .numero.leido {
+            background: rgba(0, 212, 255, 0.2);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .especial {
+            color: var(--primary);
+            border-color: var(--primary) !important;
+            animation: pulse 2s infinite;
+            font-weight: bold;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 75, 125, 0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(255, 75, 125, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 75, 125, 0); }
+        }
+
+        .mensaje-box {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 20px 30px;
+            border-radius: 25px;
+            width: 85%;
+            max-width: 400px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
+            z-index: 10;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .mensaje-box.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .secreto {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, #001d3d, #000814);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 2s ease;
+            z-index: 100;
+            padding: 20px;
+        }
+
+        .secreto.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .secreto-content {
+            max-width: 500px;
+        }
+
+        .secreto h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            line-height: 1.4;
+            color: #fff;
+        }
+
+        .heart {
+            position: fixed;
+            top: -20px;
+            color: var(--primary);
+            font-size: 20px;
+            z-index: 99;
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+
+        .inicio {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle, #001d3d, #000814);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 1.2s ease, visibility 1.2s ease;
+        }  
+
+        .inicio.oculto {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .btn-inicio {
+            font-size: 4rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            animation: pulse 2s infinite;
+            color: #fff;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="inicio" id="inicio">
+        <button class="btn-inicio" onclick="iniciar()">❣️</button>
+    </div>
+
+    <div class="stars-container">
+        <div class="stars"></div>
+    </div>
+
+    <div class="container">
+        <h1>14 Razones por las que te amo 💗</h1>
+
+        <div class="grid" id="mainGrid">
+            <div class="numero" onclick="mostrar(1, this)">1</div>
+            <div class="numero" onclick="mostrar(2, this)">2</div>
+            <div class="numero" onclick="mostrar(3, this)">3</div>
+            <div class="numero" onclick="mostrar(4, this)">4</div>
+            <div class="numero" onclick="mostrar(5, this)">5</div>
+            <div class="numero" onclick="mostrar(6, this)">6</div>
+            <div class="numero" onclick="mostrar(7, this)">7</div>
+            <div class="numero" onclick="mostrar(8, this)">8</div>
+            <div class="numero" onclick="mostrar(9, this)">9</div>
+            <div class="numero" onclick="mostrar(10, this)">10</div>
+            <div class="numero" onclick="mostrar(11, this)">11</div>
+            <div class="numero" onclick="mostrar(12, this)">12</div>
+            <div class="numero" onclick="mostrar(13, this)">13</div>
+            <div class="numero especial" onclick="mostrar(14, this)">14</div>
+        </div>
+    </div>
+
+    <div class="mensaje-box" id="mensajeBox">
+        <span id="textoMensaje"></span>
+    </div>
+
+    <div class="secreto" id="secreto">
+        <div class="secreto-content">
+            <h2 id="textoFinal">
+                Si llegaste hasta aquí...<br><br>
+                Es porque eres lo más hermoso que me ha pasado. 🥹 <br><br>
+                Gracias por existir, <strong>Sammy Rizitos</strong>.<br>
+                Feliz 14 de febrero.
+            </h2>
+        </div>
+    </div>
+
+    <audio id="latido" loop>
+        <source src="latido.mp3" type="audio/mpeg">
+    </audio>
+        <audio id="musicaFondo" loop>
+        <source src="cuando_me_enamoro.mp3" type="audio/mpeg">
+    </audio>
+        <audio id="audioespecial">
+        <source src="audiolindo.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="audio1" src="razon1.mp3"></audio>
+    <audio id="audio2" src="razon2.mp3"></audio>
+    <audio id="audio3" src="razon3.mp3"></audio>
+    <audio id="audio4" src="razon4.mp3"></audio>
+    <audio id="audio5" src="razon5.mp3"></audio>
+    <audio id="audio6" src="razon6.mp3"></audio>
+    <audio id="audio7" src="razon7.mp3"></audio>
+    <audio id="audio8" src="razon8.mp3"></audio>
+    <audio id="audio9" src="razon9.mp3"></audio>
+    <audio id="audio10" src="razon10.mp3"></audio>
+    <audio id="audio11" src="razon11.mp3"></audio>
+    <audio id="audio12" src="razon12.mp3"></audio>
+    <audio id="audio13" src="razon13.mp3"></audio>
+    <audio id="audio14" src="razon14.mp3"></audio>
+
+    <script>
+        let musicaIniciada = false;
+        let volumenNormal = 0.25;
+        let volumenBajo = 0.08;
+
+        const mensajes = [
+            "",
+            "Porque incluso a la distancia, tu amor se siente más cerca que nunca.",
+            "Porque tus rizitos son uno de mis pensamientos favoritos.",
+            "Porque tus ojitos tienen la forma exacta de hacerme sonreír sin darte cuenta.",
+            "Porque contigo aprendí que el amor no entiende de kilómetros.",
+            "Porque incluso la forma en la que eres conmigo me hace sentir tan amado.",
+            "Porque sabes cómo hacerme feliz incluso en los días más difíciles.",
+            "Porque me haces sentir amado de una manera tan real y sincera.",
+            "Porque cada mensaje tuyo ilumina mi día por completo.",
+            "Porque aun lejos, siempre encuentras la forma de estar presente.",
+            "Porque tu cariño atraviesa pantallas y distancias.",
+            "Porque me demuestras amor hasta en los detalles más pequeños.",
+            "Porque haces que la espera valga totalmente la pena.",
+            "Porque siempre intentas ganarme en amor… y casi siempre lo logras.",
+            "Porque no importa la distancia, mi corazón siempre te elige a ti."
+        ];
+
+        let mensajeTimeout;
+
+        const mensajeBox = document.getElementById("mensajeBox");
+        const textoMensaje = document.getElementById("textoMensaje");
+
+        function mostrar(numero, elemento) {
+
+            const musicaFondo = document.getElementById("musicaFondo");
+
+            if (!musicaIniciada && musicaFondo) {
+                musicaFondo.volume = volumenNormal;
+                musicaFondo.play().catch(() => {});
+                musicaIniciada = true;
+            }
+
+            for (let i = 1; i <= 13; i++) {
+                const audio = document.getElementById("audio" + i);
+                if (audio) {
+                    audio.pause();
+                    audio.currentTime = 0;
+                }
+            }
+
+            clearTimeout(mensajeTimeout);
+
+            textoMensaje.textContent = mensajes[numero];
+            mensajeBox.classList.add("visible");
+
+            const audioActual = document.getElementById("audio" + numero);
+
+            if (audioActual) {
+                if (musicaFondo) musicaFondo.volume = volumenBajo;
+
+                audioActual.volume = 0.8;
+                audioActual.play().catch(() => {});
+
+                audioActual.onended = () => {
+                    if (musicaFondo) musicaFondo.volume = volumenNormal;
+                };
+            }
+
+            document.querySelectorAll(".numero").forEach(n => {
+                n.classList.remove("leido");
+            });
+            elemento.classList.add("leido");
+
+            mensajeTimeout = setTimeout(() => {
+                mensajeBox.classList.remove("visible");
+            }, 4500);
+
+            if (numero === 14) {
+                textoMensaje.textContent = mensajes[14];
+                mensajeBox.classList.add("visible");
+
+                const musicaFondo = document.getElementById("musicaFondo");
+                if (musicaFondo) musicaFondo.volume = volumenBajo;
+
+                setTimeout(() => {
+                    mensajeBox.classList.remove("visible");
+                }, 4500);
+
+                setTimeout(() => {
+                    final14();
+                }, 6000);
+
+                return;
+            }
+        }
+
+        document.body.addEventListener("click", () => {
+            const latido = document.getElementById("latido");
+            if(latido.paused) {
+                latido.volume = 0.1;
+                latido.play().catch(e => console.log("Audio esperando interacción"));
+            }
+        }, { once: true });
+
+        function crearCorazon() {
+            const heart = document.createElement("div");
+            heart.className = "heart";
+            heart.innerHTML = "❤";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+            heart.style.fontSize = (Math.random() * 15 + 15) + "px";
+            heart.style.opacity = Math.random();
+            document.body.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 5000);
+        }
+
+        function final14() {
+            const musicaFondo = document.getElementById("musicaFondo");
+            const musica14 = document.getElementById("audioespecial");
+
+            for (let i = 1; i <= 14; i++) {
+                const audio = document.getElementById("audio" + i);
+                if (audio) {
+                    audio.pause();
+                    audio.currentTime = 0;
+                }
+            }
+
+            if (musicaFondo) {
+                musicaFondo.volume = 0.05;
+            }
+
+            const intervaloCorazones = setInterval(crearCorazon, 150);
+
+            setTimeout(() => {
+                const secreto = document.getElementById("secreto");
+                const textoFinal = document.getElementById("textoFinal");
+
+                secreto.classList.add("visible");
+
+                const mensaje =
+                    "Si llegaste hasta aquí...\n\n" +
+                    "Es porque eres lo más hermoso que me ha pasado. 💙\n\n" +
+                    "Gracias por existir, Sammy Rizitos.\n\n" +
+                    "Feliz 14 de febrero.";
+
+                escribirTexto(textoFinal, mensaje, 50);
+                clearInterval(intervaloCorazones);
+            }, 3500);
+        }
+
+        function iniciar() {
+            const inicio = document.getElementById("inicio");
+            const container = document.querySelector(".container");
+
+            inicio.classList.add("oculto");
+
+            setTimeout(() => {
+                container.classList.add("visible");
+            }, 200);
+
+            const latido = document.getElementById("latido");
+            latido.volume = 0.1;
+            latido.play().catch(()=>{});
+
+            const musicaFondo = document.getElementById("musicaFondo");
+            if (musicaFondo) {
+                musicaFondo.volume = 0.25;
+                musicaFondo.play().catch(()=>{});
+                musicaIniciada = true;
+            }
+        }
+
+        function escribirTexto(elemento, texto, velocidad = 45) {
+            elemento.innerHTML = "";
+            let i = 0;
+            let audioIniciado = false;
+            
+            const musica14 = document.getElementById("audioespecial");
+            const musicaFondo = document.getElementById("musicaFondo");
+
+            const intervalo = setInterval(() => {
+
+                if (!audioIniciado) {
+                    if (musicaFondo) musicaFondo.volume = 0.1;
+
+                    if (musica14) {
+                        musica14.currentTime = 0;
+                        musica14.volume = 0.6;
+                        musica14.play().catch(e => console.log("Bloqueado:", e));
+                    }
+
+                    audioIniciado = true;
+                }
+
+                const char = texto.charAt(i);
+
+                if (char === "\n") {
+                    elemento.innerHTML += "<br>";
+                } else {
+                    elemento.innerHTML += char;
+                }
+
+                i++;
+
+                if (i >= texto.length) {
+                    clearInterval(intervalo);
+
+                    if (musicaFondo) {
+                        setTimeout(() => {
+                            musicaFondo.volume = 0.15;
+                        }, 1000);
+                    }
+                }
+
+            }, velocidad);
+        }
+
+    </script>
+</body>
+</html>
